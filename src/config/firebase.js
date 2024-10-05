@@ -27,7 +27,6 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
 
-
 export const register = async (email, username, password, file) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -50,6 +49,16 @@ export const register = async (email, username, password, file) => {
     }
 
     toast.success("User created!");
+  } catch (error) {
+    console.log(error);
+    toast.error(error.code.replace(/[/-]/g, " "));
+  }
+};
+
+export const login = async (email, password) => {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    console.log("Succes");
   } catch (error) {
     console.log(error);
     toast.error(error.code.replace(/[/-]/g, " "));
