@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { login } from "../config/firebase";
 import { UserContext } from "../context/UserProvider";
 
@@ -9,7 +9,7 @@ const Login = () => {
 
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
-
+  const location = useLocation();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -17,10 +17,10 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (user) {
+    if (user && location.pathname === "/login") {
       navigate("/");
     }
-  }, [user]);
+  }, [user, location.pathname, navigate]);
 
   return (
     <div className="flex w-screen h-screen justify-center items-center">

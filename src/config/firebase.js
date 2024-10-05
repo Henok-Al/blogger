@@ -64,3 +64,13 @@ export const login = async (email, password) => {
     toast.error(error.code.replace(/[/-]/g, " "));
   }
 };
+
+export const logout = async () => {
+  try {
+    await signOut(auth);
+    toast.success("Logged out!");
+  } catch (error) {
+    console.log(error);
+    toast.error(error.code.replace(/[/-]/g, " "));
+  }
+};
