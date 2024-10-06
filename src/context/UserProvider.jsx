@@ -1,14 +1,13 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
+import { auth, db } from "../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
-import { auth, db } from "../config/firebase";
 
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (currentUser) => {
@@ -23,18 +22,12 @@ const UserProvider = ({ children }) => {
       } catch (error) {
         console.log(error);
         toast.error(error.code.replace(/[/-]/g, " "));
-      } finally {
-        setLoading(false);
       }
     });
-
-    return () => unsub();
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, loading }}>
-      {children}
-    </UserContext.Provider>
+    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
   );
 };
 

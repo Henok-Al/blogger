@@ -3,18 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserProvider";
 
 const ProtectedRoute = ({ children }) => {
-  const { user, loading } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!loading && !user) {
+    console.log("User state:", user); // Debugging line
+    if (!user) {
+      console.log("Redirecting to /login"); // Debugging line
       navigate("/login");
     }
-  }, [user, loading, navigate]);
-
-  if (loading) {
-    return <div>Loading...</div>; // or some loading spinner
-  }
+  }, [user, navigate]);
 
   return <div>{children}</div>;
 };

@@ -1,4 +1,4 @@
-import  { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import NavBar from "../components/NavBar";
 import pb from "../assets/images/pb.jpg";
 import { UserContext } from "../context/UserProvider";

@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../config/firebase";
 import { UserContext } from "../context/UserProvider";
 
@@ -9,7 +9,6 @@ const Login = () => {
 
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -17,10 +16,10 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (user && location.pathname === "/login") {
+    if (user) {
       navigate("/");
     }
-  }, [user, location.pathname, navigate]);
+  }, [user]);
 
   return (
     <div className="flex w-screen h-screen justify-center items-center">
@@ -50,7 +49,7 @@ const Login = () => {
             <Link to={"/register"} className="font-bold">
               Register
             </Link>
-          </div>{" "}
+          </div>
           <button
             type="submit"
             className="rounded-full bg-blue-400 text-white text-center w-full py-2"

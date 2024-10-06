@@ -3,6 +3,8 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import Blogs from "./pages/Blogs";
+import BlogPost from "./pages/BlogPost";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const router = createBrowserRouter([
@@ -23,6 +25,22 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <Profile />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/blogs",
+    element: (
+      <ProtectedRoute>
+        <Blogs />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/blogs/:blogID",
+    element: (
+      <ProtectedRoute>
+        <BlogPost />
       </ProtectedRoute>
     ),
   },

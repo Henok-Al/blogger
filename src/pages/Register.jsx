@@ -1,6 +1,6 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import pb from "../assets/images/pb.jpg";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { register } from "../config/firebase";
 import { UserContext } from "../context/UserProvider";
 
@@ -13,8 +13,6 @@ const Register = () => {
 
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
-  const location = useLocation();
-
 
   const imageInputRef = useRef();
 
@@ -36,10 +34,10 @@ const Register = () => {
   };
 
   useEffect(() => {
-    if (user && location.pathname === "/register") {
+    if (user) {
       navigate("/");
     }
-  }, [user, location.pathname, navigate]);
+  }, [user]);
 
   return (
     <div className="flex w-screen h-screen justify-center items-center">
